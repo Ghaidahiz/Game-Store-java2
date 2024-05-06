@@ -15,29 +15,27 @@ Authors:
 package gamestore_project;
 
 import java.util.*;
-
 public class GEA_GameStore {
 
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-
+            
         Admin Almaha = new Admin("Almaha", "123");      // setting up  
         Admin Eman = new Admin("Eman", "321");         // the admins
         Admin Ghaida = new Admin("Ghaida", "213");     // of the store
 
         GameStore GEA = new GameStore("GEA", Almaha, Eman, Ghaida, 200, 100); //creating the store
-
-        User Afnan = new User("Afnan", 500);       // setting up
-        User Sarah = new User("sarah", 250.50);    // some users
-        User Michael = new User("michael", 20);
-        User Abdullah = new User("ABDULLAH", 300);
-
+        User Afnan = new User("Afnan", 500);            // setting up
+        User Sarah = new User("sarah", 250.50);         // some users
+        User Michael = new User("michael", 20); 
+        User Abdullah = new User("ABDULLAH", 300); 
+        
         GEA.addUser(Abdullah);
         GEA.addUser(Michael);   // adding them 
         GEA.addUser(Sarah);    // to the store's userList
         GEA.addUser(Afnan);
-
+        
         /*
         Setting up some games and adding them to the store's gameList
 
@@ -79,8 +77,12 @@ public class GEA_GameStore {
                 check = sc.nextInt();   // takes the user's input then consumes the remaining
                 sc.nextLine();          // line to avoid problems in the rest of the code
                 if (check < 1 || check > 3) 
-                    System.out.println("\nINVALID INPUT, PLEASE ENTER A NUMBER BETWEEN 1-3 \n"); //checks if the number was in range and prints a message if it was not
-            } catch (InputMismatchException e) {
+                    throw new ChoiceOutOfBoundException();
+            } 
+            catch(ChoiceOutOfBoundException e){
+               System.out.println("\nINVALID INPUT, PLEASE ENTER A NUMBER BETWEEN 1-3 \n"); //checks if the number was in range and prints a message if it was not
+            }
+            catch (InputMismatchException e) {
                 System.out.println("\n INVALID INPUT, PLEASE TRY AGAIN.. \n PLEASE ENTER A DIGIT "); //prints a message to direct the user
                 sc.next(); // consumes anything left from previous attempts
                 check = 0; // sets the check to 0 so we re-enter the while loop, the loop continues until the user enters 3 in check
