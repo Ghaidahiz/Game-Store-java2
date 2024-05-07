@@ -1,7 +1,7 @@
 package gamestore_project;
 
-import java.util.Scanner;
-import java.util.InputMismatchException;
+
+import java.util.*;
 
 public class GameStore {
    // GameStore is the fundamental class that deals with Games, Users, and Admins,
@@ -132,35 +132,33 @@ public class GameStore {
 
    }
 
-   public boolean addGame(Game g) { //adds a game and casts it to its genre if 
+   public boolean addGame(Game g){ 
+                                     //adds a game and casts it to its genre if 
                                     //the gamelist wasn't full
       if (noGames < gameList.length) {
          if (g instanceof Detective) {
-            gameList[noGames++] = new Detective(g);
-            return true;
+            gameList[noGames++] = new Detective(g); 
          }
 
          else if (g instanceof RPG) {
             gameList[noGames++] = new RPG(g);
-            return true;
          }
 
          else if (g instanceof StoryRich) {
             gameList[noGames++] = new StoryRich(g);
-            return true;
          }
 
          else if (g instanceof Horror) {
             gameList[noGames++] = new Horror(g);
-            return true;
          }
 
          else if (g instanceof Survival) {
             gameList[noGames++] = new Survival(g);
-            return true;
-         } else {
+         } 
+         else {
             return false; // not one of the genres "impossible, but we have to cover all cases"
          }
+         return true;
       } else {
          System.out.println("CAN NOT ADD A NEW GAME, THE STORE IS FULL :( ");
          return false;
@@ -197,6 +195,10 @@ public class GameStore {
 
    }
    //getters
+   public User[] getUserList(){
+      return userList;
+   }
+
    public Game[] getGameList() {
       return gameList;
    }
