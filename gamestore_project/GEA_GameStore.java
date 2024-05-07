@@ -13,11 +13,11 @@ Authors:
 */
 
 package gamestore_project;
-
+import java.io.*;
 import java.util.*;
 public class GEA_GameStore {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, FileNotFoundException {
 
         Scanner sc = new Scanner(System.in);
             
@@ -26,43 +26,74 @@ public class GEA_GameStore {
         Admin Ghaida = new Admin("Ghaida", "213");     // of the store
 
         GameStore GEA = new GameStore("GEA", Almaha, Eman, Ghaida, 200, 100); //creating the store
-        User Afnan = new User("Afnan", 500);            // setting up
-        User Sarah = new User("sarah", 250.50);         // some users
-        User Michael = new User("michael", 20); 
-        User Abdullah = new User("ABDULLAH", 300); 
+        File file = new File("C:\\Users\\EMAN\\git\\Game-Store-project\\gamestore_project\\src\\gamestore_project\\Users.data");
+        FileInputStream f1 = new FileInputStream(file);
+        ObjectInputStream userIn = new ObjectInputStream(f1);
+       //FileOutputStream f0 = new FileOutputStream(file);
+       //ObjectOutputStream userOut = new ObjectOutputStream(f0);
+       
+
+        File file2 = new File("C:\\Users\\EMAN\\git\\Game-Store-project\\gamestore_project\\src\\gamestore_project\\Games.data");
+      //  FileOutputStream f2 = new FileOutputStream(file2);
+      //  ObjectOutputStream gameOut = new ObjectOutputStream(f2);
+       FileInputStream f3 = new FileInputStream(file2);
+       ObjectInputStream gameIn = new ObjectInputStream(f3);
+
+         try{
+            while (true) {
+                GEA.addUser(((User)userIn.readObject()));
+            }
+        }
+        catch(EOFException e ){} 
+        try{
+            while (true) {
+                GEA.addGame(((Game)gameIn.readObject()));
+            }
+        }
+        catch(EOFException e ){} 
+      /* User[] users = new User[4];
+       users[0] = new User("Afnan", 500);            // setting up
+       users[1] = new User("sarah", 250.50);         // some users
+       users[2] = new User("michael", 20); 
+       users[3] = new User("ABDULLAH", 300); 
         
-        GEA.addUser(Abdullah);
-        GEA.addUser(Michael);   // adding them 
-        GEA.addUser(Sarah);    // to the store's userList
-        GEA.addUser(Afnan);
+        GEA.addUser(users[0]);
+        GEA.addUser(users[1]);   // adding them 
+        GEA.addUser(users[2]);    // to the store's userList
+        GEA.addUser(users[3]);
+        for(int i =0 ; i<4;i++)
+        userOut.writeObject(users[i]); userOut.close(); f0.close();
         
         /*
         Setting up some games and adding them to the store's gameList
 
                                 |
                                 V
-        */                      
-        Game Sekiro = new StoryRich("Sekiro", "cube game", 229);  
-        Game Detroit = new StoryRich("Detroit become human", "Quantic Dream", 185);
-        Game Ori = new RPG("Ori and the blind forest", "XBOX", 85);
-        Game Persona_5 = new RPG("Persona 5", "SEGA", 250);
-        Game Minecraft = new Survival("Minecraft", "Mojang", 100);
-        Game Dont_Starve = new Survival("Don't Starve", "Klei", 21.95);
-        Game Unsolved_Case = new Detective("Unsolved case", "eleven puzzels", 13.95);
-        Game Ace_attorney = new Detective("Ace attorney", "CAPCOM", 138);
-        Game Silent_hill = new Horror("Silent Hill", "Konami", 90.33);
-        Game Lethal_company = new Horror("Lethal company", "zeekerss", 22.49);
+                             
+        Game [] games = new Game[10];
+        games[0] = new StoryRich("Sekiro", "cube game", 229);  
+        games[1] = new StoryRich("Detroit become human", "Quantic Dream", 185);
+        games[2]= new RPG("Ori and the blind forest", "XBOX", 85);
+        games[3] = new RPG("Persona 5", "SEGA", 250);
+        games[4] = new Survival("Minecraft", "Mojang", 100);
+        games[5]= new Survival("Don't Starve", "Klei", 21.95);
+        games[6] = new Detective("Unsolved case", "eleven puzzels", 13.95);
+        games[7] = new Detective("Ace attorney", "CAPCOM", 138);
+        games[8] = new Horror("Silent Hill", "Konami", 90.33);
+        games[9] = new Horror("Lethal company", "zeekerss", 22.49);
 
-        GEA.addGame(Persona_5);
-        GEA.addGame(Minecraft);
-        GEA.addGame(Unsolved_Case);
-        GEA.addGame(Silent_hill);
-        GEA.addGame(Sekiro);
-        GEA.addGame(Ori);
-        GEA.addGame(Detroit);
-        GEA.addGame(Dont_Starve);
-        GEA.addGame(Lethal_company);
-        GEA.addGame(Ace_attorney);
+        GEA.addGame( games[0]);
+        GEA.addGame( games[1]);
+        GEA.addGame( games[2]);
+        GEA.addGame( games[3]);
+        GEA.addGame( games[4]);
+        GEA.addGame( games[5]);
+        GEA.addGame( games[6]);
+        GEA.addGame( games[7]);
+        GEA.addGame( games[8]);
+        GEA.addGame( games[9]);
+        for(int i =0; i<10; i++)
+           gameOut.writeObject(games[i]);   gameOut.close(); f2.close();*/
 
         System.out.println("\nGEA GAME STORE\n~*~*~*~*~*~*~*~"); //Start of the actual program
         int check = 0; 
@@ -112,6 +143,7 @@ public class GEA_GameStore {
                     } while (wallet < 0);
 
                     u1 = new User(name, wallet); //creating and adding a new user based on the user's input
+                 
                     GEA.addUser(u1);
 
                 } else if (GEA.findUser(name) != null) {//if the user has been found, the program identifies them. such as the predefined users in the beginning of this class 

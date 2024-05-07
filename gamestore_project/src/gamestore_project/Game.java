@@ -1,6 +1,8 @@
 package gamestore_project;
 
-public abstract class Game { 
+import java.io.Serializable;
+
+public abstract class Game implements Serializable { 
 // Game is an abstract class that has the essential info for each game
 
 	protected String name;

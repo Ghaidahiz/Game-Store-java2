@@ -1,14 +1,12 @@
 package gamestore_project;
 
-import java.util.Scanner;
-
-public class User {
+import java.io.Serializable;
+public class User implements Serializable {
 	// User is a class for the users of the game store,
 	private String username;
 	private int numberOfGames;
 	private double wallet;
 	private Game[] gameLibrary = new Game[50];
-	Scanner sc = new Scanner(System.in);
 
 	public User(String n, double wallet) { //a paramitrized constructor that sets the values for the attributes
 		username = n;
