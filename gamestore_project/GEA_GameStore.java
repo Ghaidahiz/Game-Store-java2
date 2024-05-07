@@ -29,13 +29,8 @@ public class GEA_GameStore {
         File file = new File("C:\\Users\\EMAN\\git\\Game-Store-project\\gamestore_project\\src\\gamestore_project\\Users.data");
         FileInputStream f1 = new FileInputStream(file);
         ObjectInputStream userIn = new ObjectInputStream(f1);
-       //FileOutputStream f0 = new FileOutputStream(file);
-       //ObjectOutputStream userOut = new ObjectOutputStream(f0);
-       
-
+     
         File file2 = new File("C:\\Users\\EMAN\\git\\Game-Store-project\\gamestore_project\\src\\gamestore_project\\Games.data");
-      //  FileOutputStream f2 = new FileOutputStream(file2);
-      //  ObjectOutputStream gameOut = new ObjectOutputStream(f2);
        FileInputStream f3 = new FileInputStream(file2);
        ObjectInputStream gameIn = new ObjectInputStream(f3);
 
@@ -393,6 +388,18 @@ public class GEA_GameStore {
 
 
         } while (check != 3); //closes the program
-
+        
+            FileOutputStream f0 = new FileOutputStream(file);
+            ObjectOutputStream userOut = new ObjectOutputStream(f0);
+            User[] user = GEA.getUserList();
+            for(int i=0 ; i <GEA.getNoUsers(); i++)
+               userOut.writeObject(user[i]);
+     
+            FileOutputStream f2 = new FileOutputStream(file2);
+            ObjectOutputStream gameOut = new ObjectOutputStream(f2); 
+            Game[] game =GEA.getGameList();
+            for(int i=0 ; i <GEA.getNoGames(); i++)
+            gameOut.writeObject(game[i]);
+            gameOut.close(); f2.close(); userOut.close(); f0.close();
     }
 }
